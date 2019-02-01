@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/message")
+@RequestMapping("/mess")
 public class MorpherController {
 
     @GetMapping("/gender")
@@ -43,6 +43,11 @@ public class MorpherController {
         Parse parse = new Parse(input);
         FIO name = (FIO) parse.getFIO();
         return name;
+    }
+
+    @GetMapping("/123")
+    public String testMethod() {
+        return "Hello world";
     }
 
 
