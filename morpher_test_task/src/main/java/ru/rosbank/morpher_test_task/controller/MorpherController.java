@@ -32,25 +32,20 @@ public class MorpherController {
     }
 
     @GetMapping("/definecase")
-    public String definePadezh(Case formCase, boolean isPlural) {
+    public String defineCase(Case formCase, boolean isPlural) {
         Parse parse = new Parse("Воздушный шар");
         String newValue = parse.getForm(formCase, isPlural);
         return newValue;
     }
-
+    /**
+     * Method define FIO in strings but works NotCorrect!!!!!
+     * @param input name lastName and middleName
+     * @return sort value
+     */
     @GetMapping("/fio")
     public FIO fio(String input) {
         Parse parse = new Parse(input);
         FIO name = (FIO) parse.getFIO();
         return name;
     }
-
-    @GetMapping("/123")
-    public String testMethod() {
-        return "Hello world";
-    }
-
-
-
-
 }

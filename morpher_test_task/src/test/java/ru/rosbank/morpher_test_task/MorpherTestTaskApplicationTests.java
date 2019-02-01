@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.rosbank.morpher_test_task.controller.MorpherController;
+import ru.rosbank.spring_test.FIO;
+import ru.rosbank.spring_test.utils.Case;
 import ru.rosbank.spring_test.utils.Gender;
 
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
@@ -67,7 +69,91 @@ public class MorpherTestTaskApplicationTests {
 		assertEquals(expected, result);
 	}
 
-	
+	//------------------------------------------------------------------------------------------------------------------
+	@Test
+	public void whenEnterMaillThenReturnFemail() {
+		System.out.println("Изменение рода с мужского на женский");
+		String result = morpherController.exchangeGender("Красивый", Gender.Feminine);
+		String expected = "Красивая";
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void whenEnterMaillThenReturnNeuter() {
+		System.out.println("Изменение рода с мужского на средний");
+		String result = morpherController.exchangeGender("Красивый", Gender.Neuter);
+		String expected = "Красивое";
+		assertEquals(expected, result);
+	}
+
+	//------------------------------------------------------------------------------------------------------------------
+
+	@Test
+	public void whenEnterGenCaseThenReturnGenValue() {
+		System.out.println("Склонение слов (родительный падеж - кого? чего? (нет)");
+		String result = morpherController.defineCase(Case.Gen, false);
+		String expected = "воздушного шара";
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void whenEnterDatCaseThenReturnDatValue() {
+		System.out.println("Склонение слов (дательный падеж - кому? чему? (дам)");
+		String result = morpherController.defineCase(Case.Dat, false);
+		String expected = "воздушному шару";
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void whenEnterPluralDatCaseThenReturnDatPluralValue() {
+		System.out.println("Склонение слов (дательный падеж - множественное число - кому? чему? (дам)");
+		String result = morpherController.defineCase(Case.Dat, true);
+		String expected = "воздушным шарам";
+		assertEquals(expected, result);
+	}
+
+
+	//------------------------------------------------------------------------------------------------------------------
+
+	@Test
+	public void whenEnterFIOThenReturnSortFIO() {
+		System.out.println("Обработка Фам");
+		FIO result = morpherController.fio("Александр Сергеевич Пушкин");
+		String expectedFirstName = "Александр";
+		String expectedLastName = "Пушкин";
+		String expectedMiddleName = "Сергеевич";
+		assertEquals(expectedLastName, result.getLastName());
+		assertEquals(expectedFirstName, result.getFirstName());
+		assertEquals(expectedMiddleName, result.getMiddleName());
+	}
+
+//	@Test
+//	public void whenEnterSameFIOButAnotherOrderThenReturnSortFIO() {
+//		System.out.println("Обработка Фам");
+//		FIO result = morpherController.fio("Пушкин Александр Сергеевич");
+//		String expectedFirstName = "Александр";
+//		String expectedLastName = "Пушкин";
+//		String expectedMiddleName = "Сергеевич";
+//		assertEquals(expectedLastName, result.getLastName());
+//		assertEquals(expectedFirstName, result.getFirstName());
+//		assertEquals(expectedMiddleName, result.getMiddleName());
+//	}
+//
+//	@Test
+//	public void whenEnterSameFIOButAnotherOrder2ThenReturnSortFIO() {
+//		System.out.println("Обработка Фам");
+//		FIO result = morpherController.fio("Сергеевич Пушкин Александр");
+//		String expectedFirstName = "Александр";
+//		String expectedLastName = "Пушкин";
+//		String expectedMiddleName = "Сергеевич";
+//		assertEquals(expectedLastName, result.getLastName());
+//		assertEquals(expectedFirstName, result.getFirstName());
+//		assertEquals(expectedMiddleName, result.getMiddleName());
+//	}
+
+
+
+
 
 
 
