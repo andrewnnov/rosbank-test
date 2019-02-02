@@ -1,6 +1,8 @@
 package ru.rosbank.morpher_test_task.controller;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,7 @@ public class MorpherController {
 
     @GetMapping("/gender")
     public Gender defineGender(String input) {
+      System.out.println(SecurityContextHolder.getContext().getAuthentication());
       Parse parse = new Parse(input);
       return new Parse(input).getGender();
     }
@@ -43,6 +46,7 @@ public class MorpherController {
      * @return sort value
      */
     @GetMapping("/fio")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public FIO fio(String input) {
         Parse parse = new Parse(input);
         FIO name = (FIO) parse.getFIO();
