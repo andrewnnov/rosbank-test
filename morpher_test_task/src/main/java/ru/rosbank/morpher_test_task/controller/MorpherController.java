@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mess")
+@RequestMapping("/russian/message")
 public class MorpherController {
 
     @GetMapping("/gender")
@@ -31,7 +31,7 @@ public class MorpherController {
         return newValue;
     }
 
-    @GetMapping("/definecase")
+    @GetMapping("/caseDefinition")
     public String defineCase(Case formCase, boolean isPlural) {
         Parse parse = new Parse("Воздушный шар");
         String newValue = parse.getForm(formCase, isPlural);
