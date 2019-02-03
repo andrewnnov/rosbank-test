@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.rosbank.morpher_test_task.controller.MorpherController;
 import ru.rosbank.spring_test.FIO;
+import ru.rosbank.spring_test.IFIO;
 import ru.rosbank.spring_test.utils.Case;
 import ru.rosbank.spring_test.utils.Gender;
 
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MorpherTestTaskApplicationTests {
+public class MorpherApplicationTests {
 
 	MorpherController morpherController;
 
@@ -118,7 +119,7 @@ public class MorpherTestTaskApplicationTests {
 	@Test
 	public void whenEnterFIOThenReturnSortFIO() {
 		System.out.println("Обработка Фам");
-		FIO result = morpherController.fio("Александр Сергеевич Пушкин");
+		IFIO result = morpherController.fio("Александр Сергеевич Пушкин");
 		String expectedFirstName = "Александр";
 		String expectedLastName = "Пушкин";
 		String expectedMiddleName = "Сергеевич";
