@@ -8,10 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -31,8 +27,7 @@ public class MorpherApiTest {
     @Test
     public void whenAuthIgnoredThrowErr() {
         when().get("/russian/message/gender?input=%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B9").
-                then().
-                statusCode(401);
+                then().statusCode(401);
     }
 
     @Test
@@ -61,7 +56,6 @@ public class MorpherApiTest {
 
     @Test
     public void whenEnterFIOThenReturnFIOSort() {
-
         given().auth().basic("user", "password").when()
                 .get("/russian/message/fio?input=Александр Сергеевич Пушкин").
                 then()
