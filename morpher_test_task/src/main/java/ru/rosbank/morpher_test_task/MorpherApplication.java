@@ -9,9 +9,8 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 @SpringBootApplication
 public class MorpherApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MorpherApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MorpherApplication.class, args);
+    }
 
 }
-

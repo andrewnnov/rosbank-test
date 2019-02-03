@@ -8,31 +8,33 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String USER_NAME = "user";
-    public static final String ENCODER_PASSWORD = "$2a$04$AjFEmZeX7mN8zSn57PUEZeJgBeoKMvwteZMBiP57Jb4AGFsUORmLC";
-
-    //@Autowired
+    public static final String ENCODED_PASSWORD = "$2a$04$AjFEmZeX7mN8zSn57PUEZeJgBeoKMvwteZMBiP57Jb4AGFsUORmLC";
+    @Autowired
     private AuthenticationEntryPoint authEntryPoint;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().anyRequest()
-                .authenticated()
+        http.csrf().disable().authorizeRequests()
+                .anyRequest().authenticated()
                 .and().httpBasic()
                 .authenticationEntryPoint(authEntryPoint);
     }
 
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser(USER_NAME).password(ENCODER_PASSWORD).roles("USER");
+        auth.inMemoryAuthentication().withUser(USER_NAME).password(ENCODED_PASSWORD).roles("USER");
     }
 
     @Bean
     public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
